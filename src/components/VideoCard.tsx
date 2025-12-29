@@ -1,6 +1,6 @@
 import React from "react";
 
-interface CardData {
+export interface CardData {
   title: string;
   channelName: string;
   views: string;
@@ -40,23 +40,23 @@ const VideoCard = ({
   channelImgUrl,
 }: CardData) => {
   return (
-    <div>
-      <img src={thumbnailUrl} className="rounded-xl h-70 w-100 ml-5" alt="" />
+    <div className="p-3 m-1 cursor-pointer">
+      <img src={thumbnailUrl} className="rounded-xl h-70 w-100 ml-2" alt="" />
       <div className="grid grid-cols-12 pt-2">
-        <div className="col-span-1 pl-2">
+        <div className="col-span-2 pl-2">
           <img
-            className="rounded-full h-12 w-12 pl-2"
+            className="rounded-full h-12 w-12  bg-red-600 ml-2"
             src={channelImgUrl}
             alt=""
           />
         </div>
-        <div className="col-span-11">
+        <div className="col-span-10 ml-7">
           <div>{title}</div>
           <div className="col-span-11  text-gray-400 text-base">
             {channelName}
           </div>
           <div className="col-span-11  text-gray-400 text-base">
-            {views} views . {timeAgo(postedOn)}
+            {views} views . {postedOn}
           </div>
         </div>
       </div>

@@ -1,4 +1,6 @@
+import AppBar from "@/components/AppBar";
 import VideoCard from "@/components/VideoCard";
+import VideoGrid from "@/components/VideoGrid";
 import { useEffect, useState } from "react";
 
 interface VideoData {
@@ -19,30 +21,26 @@ interface VideoData {
 
 export default function Home() {
   const [apiData, setApiData] = useState<VideoData | null>(null);
-    
-    const clientKey = process.env.NEXT_PUBLIC_CLIENT_KEY;
 
-    useEffect(() => {
-      fetch(
-        `https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=${clientKey}&part=snippet,statistics&fields=items(id,snippet,statistics)`
-      )
-      .then((resp) => resp.json())
-      .then((data) => {
-        setApiData(data.items[0]);
-      })
-      .catch(console.error);
-  }, []);
+  const clientKey = process.env.NEXT_PUBLIC_CLIENT_KEY;
 
-  if (!apiData) return null;
+  // useEffect(() => {
+  //   fetch(
+  //     `https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=${clientKey}&part=snippet,statistics&fields=items(id,snippet,statistics)`
+  //   )
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //       setApiData(data.items[0]);
+  //     })
+  //     .catch(console.error);
+  // }, []);
+
+  // if (!apiData) return null;
 
   return (
-    <VideoCard
-      title={apiData.snippet.title}
-      channelName={apiData.snippet.channelTitle}
-      views={apiData.statistics.viewCount}
-      postedOn={apiData.snippet.publishedAt}
-      thumbnailUrl={apiData.snippet.thumbnails.high.url}
-      channelImgUrl="./image.jpg"
-    />
+    <>
+      <AppBar />
+      <VideoGrid />
+    </>
   );
 }
